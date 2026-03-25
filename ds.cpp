@@ -1,21 +1,21 @@
-977. Squares of a Sorted Array
-Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
-Example 1:
+// 977. Squares of a Sorted Array
+// Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+// Example 1:
 
-Input: nums = [-4,-1,0,3,10]
-Output: [0,1,9,16,100]
-Explanation: After squaring, the array becomes [16,1,0,9,100].
-After sorting, it becomes [0,1,9,16,100].
-Example 2:
+// Input: nums = [-4,-1,0,3,10]
+// Output: [0,1,9,16,100]
+// Explanation: After squaring, the array becomes [16,1,0,9,100].
+// After sorting, it becomes [0,1,9,16,100].
+// Example 2:
 
-Input: nums = [-7,-3,2,3,11]
-Output: [4,9,9,49,121]
+// Input: nums = [-7,-3,2,3,11]
+// Output: [4,9,9,49,121]
  
-Constraints:
+// Constraints:
 
-1 <= nums.length <= 104
--104 <= nums[i] <= 104
-nums is sorted in non-decreasing order.
+// 1 <= nums.length <= 104
+// -104 <= nums[i] <= 104
+// nums is sorted in non-decreasing order.
 
 
 solution
@@ -43,5 +43,44 @@ public:
         }
 
         return ans;
+    }
+};
+
+
+// 20. Valid Parentheses
+// Solved
+// Easy
+// Topics
+// premium lock icon
+// Companies
+// Hint
+// Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+// An input string is valid if:
+
+// Open brackets must be closed by the same type of brackets.
+// Open brackets must be closed in the correct order.
+// Every close bracket has a corresponding open bracket of the same type.
+
+
+solution:-
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+        for (char c : s) {
+            if (c == '(' || c == '{' || c == '[') {
+                st.push(c);
+            } else {
+                if (st.empty()) return false;
+                char top = st.top();
+                st.pop();
+                if (c == ')' && top != '(') return false;
+                if (c == '}' && top != '{') return false;
+                if (c == ']' && top != '[') return false;
+            }
+        }
+        return st.empty();
     }
 };
