@@ -11,22 +11,28 @@
 // Output: [4, 9, 9, 49, 121]
 //
 // Solution:
-class Solution {
+class Solution
+{
 public:
-    vector<int> sortedSquares(vector<int>& nums) {
+    vector<int> sortedSquares(vector<int> &nums)
+    {
         int n = nums.size();
         vector<int> ans(n);
         int l = 0, r = n - 1;
         int k = n - 1;
 
-        while (l <= r) {
+        while (l <= r)
+        {
             int leftSq = nums[l] * nums[l];
             int rightSq = nums[r] * nums[r];
 
-            if (leftSq > rightSq) {
+            if (leftSq > rightSq)
+            {
                 ans[k] = leftSq;
                 l++;
-            } else {
+            }
+            else
+            {
                 ans[k] = rightSq;
                 r--;
             }
@@ -47,20 +53,30 @@ public:
 // Every close bracket has a corresponding open bracket of the same type.
 //
 // Solution:
-class Solution {
+class Solution
+{
 public:
-    bool isValid(string s) {
+    bool isValid(string s)
+    {
         stack<char> st;
-        for (char c : s) {
-            if (c == '(' || c == '{' || c == '[') {
+        for (char c : s)
+        {
+            if (c == '(' || c == '{' || c == '[')
+            {
                 st.push(c);
-            } else {
-                if (st.empty()) return false;
+            }
+            else
+            {
+                if (st.empty())
+                    return false;
                 char top = st.top();
                 st.pop();
-                if (c == ')' && top != '(') return false;
-                if (c == '}' && top != '{') return false;
-                if (c == ']' && top != '[') return false;
+                if (c == ')' && top != '(')
+                    return false;
+                if (c == '}' && top != '{')
+                    return false;
+                if (c == ']' && top != '[')
+                    return false;
             }
         }
         return st.empty();
@@ -74,15 +90,22 @@ public:
 // Return the head of the merged linked list.
 //
 // Solution:
-class Solution {
+class Solution
+{
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        if (!list1) return list2;
-        if (!list2) return list1;
-        if (list1->val <= list2->val) {
+    ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
+    {
+        if (!list1)
+            return list2;
+        if (!list2)
+            return list1;
+        if (list1->val <= list2->val)
+        {
             list1->next = mergeTwoLists(list1->next, list2);
             return list1;
-        } else {
+        }
+        else
+        {
             list2->next = mergeTwoLists(list1, list2->next);
             return list2;
         }
@@ -102,28 +125,34 @@ public:
 // Output: ["()"]
 //
 // Solution:
-class Solution {
+class Solution
+{
 public:
-    void backtrack(int n, int open, int close, string& curr, vector<string>& res) {
-        if ((int)curr.size() == 2 * n) {
+    void backtrack(int n, int open, int close, string &curr, vector<string> &res)
+    {
+        if ((int)curr.size() == 2 * n)
+        {
             res.push_back(curr);
             return;
         }
 
-        if (open < n) {
+        if (open < n)
+        {
             curr.push_back('(');
             backtrack(n, open + 1, close, curr, res);
             curr.pop_back();
         }
 
-        if (close < open) {
+        if (close < open)
+        {
             curr.push_back(')');
             backtrack(n, open, close + 1, curr, res);
             curr.pop_back();
         }
     }
 
-    vector<string> generateParenthesis(int n) {
+    vector<string> generateParenthesis(int n)
+    {
         vector<string> res;
         string curr;
         backtrack(n, 0, 0, curr, res);
@@ -139,12 +168,16 @@ public:
 // Return the number of unique elements in nums.
 //
 // Solution:
-class Solution {
+class Solution
+{
 public:
-    int removeDuplicates(vector<int>& nums) {
+    int removeDuplicates(vector<int> &nums)
+    {
         int k = 1;
-        for (int i = 1; i < nums.size(); i++) {
-            if (nums[i] != nums[i - 1]) {
+        for (int i = 1; i < nums.size(); i++)
+        {
+            if (nums[i] != nums[i - 1])
+            {
                 nums[k++] = nums[i];
             }
         }
@@ -158,12 +191,16 @@ public:
 // Return the number of elements in nums which are not equal to val.
 //
 // Solution:
-class Solution {
+class Solution
+{
 public:
-    int removeElement(vector<int>& nums, int val) {
+    int removeElement(vector<int> &nums, int val)
+    {
         int k = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            if (nums[i] != val) {
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (nums[i] != val)
+            {
                 nums[k++] = nums[i];
             }
         }
@@ -177,18 +214,26 @@ public:
 // red, white, and blue.
 //
 // Solution:
-class Solution {
+class Solution
+{
 public:
-    void sortColors(vector<int>& nums) {
+    void sortColors(vector<int> &nums)
+    {
         int low = 0, mid = 0, high = nums.size() - 1;
-        while (mid <= high) {
-            if (nums[mid] == 0) {
+        while (mid <= high)
+        {
+            if (nums[mid] == 0)
+            {
                 swap(nums[low], nums[mid]);
                 low++;
                 mid++;
-            } else if (nums[mid] == 1) {
+            }
+            else if (nums[mid] == 1)
+            {
                 mid++;
-            } else {
+            }
+            else
+            {
                 swap(nums[mid], nums[high]);
                 high--;
             }
@@ -210,18 +255,25 @@ public:
 // Output: 4
 //
 // Solution:
-class Solution {
+class Solution
+{
 public:
-    long long countTriplets(int n, long long sum, long long arr[]) {
+    long long countTriplets(int n, long long sum, long long arr[])
+    {
         sort(arr, arr + n);
         long long count = 0;
-        for (int i = 0; i < n - 2; i++) {
+        for (int i = 0; i < n - 2; i++)
+        {
             int left = i + 1, right = n - 1;
-            while (left < right) {
-                if (arr[i] + arr[left] + arr[right] < sum) {
+            while (left < right)
+            {
+                if (arr[i] + arr[left] + arr[right] < sum)
+                {
                     count += (right - left);
                     left++;
-                } else {
+                }
+                else
+                {
                     right--;
                 }
             }
@@ -229,7 +281,6 @@ public:
         return count;
     }
 };
-
 
 // 143. Reorder List
 // Medium
@@ -246,26 +297,31 @@ public:
 
 // solution
 
-class Solution {
+class Solution
+{
 public:
-    void reorderList(ListNode* head) {
-        if (!head || !head->next || !head->next->next) return;
+    void reorderList(ListNode *head)
+    {
+        if (!head || !head->next || !head->next->next)
+            return;
 
         // Step 1: Find middle
-        ListNode* slow = head;
-        ListNode* fast = head;
-        while (fast && fast->next) {
+        ListNode *slow = head;
+        ListNode *fast = head;
+        while (fast && fast->next)
+        {
             slow = slow->next;
             fast = fast->next->next;
         }
 
         // Step 2: Reverse second half
-        ListNode* second = slow->next;
+        ListNode *second = slow->next;
         slow->next = nullptr;
-        ListNode* prev = nullptr;
-        ListNode* curr = second;
-        while (curr) {
-            ListNode* nxt = curr->next;
+        ListNode *prev = nullptr;
+        ListNode *curr = second;
+        while (curr)
+        {
+            ListNode *nxt = curr->next;
             curr->next = prev;
             prev = curr;
             curr = nxt;
@@ -273,10 +329,11 @@ public:
         second = prev;
 
         // Step 3: Merge two halves
-        ListNode* first = head;
-        while (second) {
-            ListNode* tmp1 = first->next;
-            ListNode* tmp2 = second->next;
+        ListNode *first = head;
+        while (second)
+        {
+            ListNode *tmp1 = first->next;
+            ListNode *tmp2 = second->next;
             first->next = second;
             second->next = tmp1;
             first = tmp1;
@@ -301,11 +358,14 @@ Return true if n is a happy number, and false if not.
 
 solution:
 
-class Solution {
+class Solution
+{
 public:
-    int sumOfSquares(int n) {
+    int sumOfSquares(int n)
+    {
         int sum = 0;
-        while (n > 0) {
+        while (n > 0)
+        {
             int d = n % 10;
             sum += d * d;
             n /= 10;
@@ -313,13 +373,63 @@ public:
         return sum;
     }
 
-    bool isHappy(int n) {
+    bool isHappy(int n)
+    {
         int slow = n;
         int fast = sumOfSquares(n);
-        while (fast != 1 && slow != fast) {
+        while (fast != 1 && slow != fast)
+        {
             slow = sumOfSquares(slow);
             fast = sumOfSquares(sumOfSquares(fast));
         }
         return fast == 1;
+    }
+};
+
+// 141. Linked List Cycle
+// Easy
+// Topics
+// Companies
+// Given head, the head of a linked list, determine if the linked list has a cycle in it.
+// There is a cycle in a linked list if there is some node in the list that can be reached
+// again by continuously following the next pointer.
+// Return true if there is a cycle in the linked list. Otherwise, return false.
+//
+// Example 1:
+// Input: head = [3, 2, 0, -4], pos = 1
+// Output: true
+// Explanation: There is a cycle in the linked list, where tail connects to the 1st node.
+//
+// Example 2:
+// Input: head = [1, 2], pos = 0
+// Output: true
+// Explanation: There is a cycle in the linked list, where tail connects to the 0th node.
+//
+// Example 3:
+// Input: head = [1], pos = -1
+// Output: false
+// Explanation: There is no cycle in the linked list.
+//
+// Solution:
+class Solution
+{
+public:
+    bool hasCycle(ListNode *head)
+    {
+        if (!head || !head->next)
+            return false;
+
+        ListNode *slow = head;
+        ListNode *fast = head->next;
+
+        while (slow != fast)
+        {
+            if (!fast || !fast->next)
+                return false;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        return true;
     }
 };
