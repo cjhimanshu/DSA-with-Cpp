@@ -433,3 +433,61 @@ public:
         return true;
     }
 };
+
+// Question 10: 876. Middle of the Linked List
+// Given the head of a singly linked list, return the middle node of the linked list.
+// If there are two middle nodes, return the second middle node.
+//
+// Example 1:
+// Input: head = [1, 2, 3, 4, 5]
+// Output: [3, 4, 5]
+//
+// Example 2:
+// Input: head = [1, 2, 3, 4, 5, 6]
+// Output: [4, 5, 6]
+//
+// Solution:
+class Solution
+{
+public:
+    ListNode *middleNode(ListNode *head)
+    {
+        ListNode *slow = head;
+        ListNode *fast = head;
+
+        while (fast && fast->next)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        return slow;
+    }
+};
+
+// Question 11: 160. Intersection of Two Linked Lists
+// Given the heads of two singly linked-lists headA and headB, return the node at
+// which the two lists intersect. If the two linked lists have no intersection,
+// return nullptr.
+//
+// Solution:
+class Solution
+{
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
+    {
+        if (!headA || !headB)
+            return nullptr;
+
+        ListNode *a = headA;
+        ListNode *b = headB;
+
+        while (a != b)
+        {
+            a = (a == nullptr) ? headB : a->next;
+            b = (b == nullptr) ? headA : b->next;
+        }
+
+        return a;
+    }
+};
