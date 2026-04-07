@@ -491,3 +491,118 @@ public:
         return a;
     }
 };
+
+// Question 12: 19. Remove Nth Node From End of List
+// Given the head of a linked list, remove the nth node from the end of the list
+// and return its head.
+//
+// Example 1:
+// Input: head = [1, 2, 3, 4, 5], n = 2
+// Output: [1, 2, 3, 5]
+//
+// Solution:
+class Solution
+{
+public:
+    ListNode *removeNthFromEnd(ListNode *head, int n)
+    {
+        ListNode dummy(0);
+        dummy.next = head;
+
+        ListNode *fast = &dummy;
+        ListNode *slow = &dummy;
+
+        for (int i = 0; i <= n; i++)
+        {
+            fast = fast->next;
+        }
+
+        while (fast)
+        {
+            fast = fast->next;
+            slow = slow->next;
+        }
+
+        ListNode *toDelete = slow->next;
+        slow->next = slow->next->next;
+        delete toDelete;
+
+        return dummy.next;
+    }
+};
+
+// Question 13: 234. Palindrome Linked List
+// Given the head of a singly linked list, return true if it is a palindrome
+// or false otherwise.
+//
+// Solution:
+class Solution
+{
+public:
+    bool isPalindrome(ListNode *head)
+    {
+        if (!head || !head->next)
+            return true;
+
+        ListNode *slow = head;
+        ListNode *fast = head;
+        while (fast->next && fast->next->next)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        ListNode *prev = nullptr;
+        ListNode *curr = slow->next;
+        while (curr)
+        {
+            ListNode *nxt = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nxt;
+        }
+
+        ListNode *p1 = head;
+        ListNode *p2 = prev;
+        while (p2)
+        {
+            if (p1->val != p2->val)
+                return false;
+            p1 = p1->next;
+            p2 = p2->next;
+        }
+
+        return true;
+    }
+};
+
+// Question 14: 283. Move Zeroes
+// Given an integer array nums, move all 0's to the end of it while maintaining
+// the relative order of the non-zero elements.
+//
+// Example:
+// Input: nums = [0, 1, 0, 3, 12]
+// Output: [1, 3, 12, 0, 0]
+//
+// Solution:
+class Solution
+{
+public:
+    void moveZeroes(vector<int> &nums)
+    {
+        int insertPos = 0;
+
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (nums[i] != 0)
+            {
+                nums[insertPos++] = nums[i];
+            }
+        }
+
+        while (insertPos < nums.size())
+        {
+            nums[insertPos++] = 0;
+        }
+    }
+};
