@@ -606,3 +606,73 @@ public:
         }
     }
 };
+
+// Question 15: 125. Valid Palindrome
+// Given a string s, determine if it is a palindrome, considering only
+// alphanumeric characters and ignoring cases.
+//
+// Example 1:
+// Input: s = "A man, a plan, a canal: Panama"
+// Output: true
+//
+// Example 2:
+// Input: s = "race a car"
+// Output: false
+//
+// Solution:
+class Solution
+{
+public:
+    bool isPalindrome(string s)
+    {
+        int left = 0;
+        int right = s.size() - 1;
+
+        while (left < right)
+        {
+            while (left < right && !isalnum(s[left]))
+                left++;
+            while (left < right && !isalnum(s[right]))
+                right--;
+
+            if (tolower(s[left]) != tolower(s[right]))
+                return false;
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+};
+
+// Question 16: 167. Two Sum II - Input Array Is Sorted
+// Given a 1-indexed array of integers numbers that is already sorted in
+// non-decreasing order, find two numbers such that they add up to target.
+// Return the indices of the two numbers as an integer array [index1, index2]
+// of length 2.
+//
+// Solution:
+class Solution
+{
+public:
+    vector<int> twoSum(vector<int> &numbers, int target)
+    {
+        int left = 0;
+        int right = numbers.size() - 1;
+
+        while (left < right)
+        {
+            int sum = numbers[left] + numbers[right];
+            if (sum == target)
+                return {left + 1, right + 1};
+
+            if (sum < target)
+                left++;
+            else
+                right--;
+        }
+
+        return {};
+    }
+};
