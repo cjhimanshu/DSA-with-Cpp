@@ -676,3 +676,147 @@ public:
         return {};
     }
 };
+
+// Question 17: 88. Merge Sorted Array
+// You are given two integer arrays nums1 and nums2, sorted in non-decreasing
+// order, and two integers m and n representing the number of elements in nums1
+// and nums2 respectively.
+// Merge nums2 into nums1 as one sorted array.
+//
+// Solution:
+class Solution
+{
+public:
+    void merge(vector<int> &nums1, int m, vector<int> &nums2, int n)
+    {
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+
+        while (j >= 0)
+        {
+            if (i >= 0 && nums1[i] > nums2[j])
+            {
+                nums1[k--] = nums1[i--];
+            }
+            else
+            {
+                nums1[k--] = nums2[j--];
+            }
+        }
+    }
+};
+
+// Question 18: 206. Reverse Linked List
+// Given the head of a singly linked list, reverse the list, and return the
+// reversed list.
+//
+// Solution:
+class Solution
+{
+public:
+    ListNode *reverseList(ListNode *head)
+    {
+        ListNode *prev = nullptr;
+        ListNode *curr = head;
+
+        while (curr)
+        {
+            ListNode *nextNode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+
+        return prev;
+    }
+};
+
+// Question 19: 169. Majority Element
+// Given an array nums of size n, return the majority element.
+// The majority element is the element that appears more than n / 2 times.
+//
+// Solution:
+class Solution
+{
+public:
+    int majorityElement(vector<int> &nums)
+    {
+        int candidate = 0;
+        int count = 0;
+
+        for (int num : nums)
+        {
+            if (count == 0)
+            {
+                candidate = num;
+            }
+
+            if (num == candidate)
+            {
+                count++;
+            }
+            else
+            {
+                count--;
+            }
+        }
+
+        return candidate;
+    }
+};
+
+// Question 20: 238. Product of Array Except Self
+// Given an integer array nums, return an array answer such that answer[i] is
+// equal to the product of all the elements of nums except nums[i].
+//
+// Solution:
+class Solution
+{
+public:
+    vector<int> productExceptSelf(vector<int> &nums)
+    {
+        int n = nums.size();
+        vector<int> ans(n, 1);
+
+        int prefix = 1;
+        for (int i = 0; i < n; i++)
+        {
+            ans[i] = prefix;
+            prefix *= nums[i];
+        }
+
+        int suffix = 1;
+        for (int i = n - 1; i >= 0; i--)
+        {
+            ans[i] *= suffix;
+            suffix *= nums[i];
+        }
+
+        return ans;
+    }
+};
+
+// Question 21: 121. Best Time to Buy and Sell Stock
+// You are given an array prices where prices[i] is the price of a given stock
+// on the ith day.
+// Return the maximum profit you can achieve from one transaction.
+//
+// Solution:
+class Solution
+{
+public:
+    int maxProfit(vector<int> &prices)
+    {
+        int minPrice = INT_MAX;
+        int maxProfit = 0;
+
+        for (int price : prices)
+        {
+            minPrice = min(minPrice, price);
+            maxProfit = max(maxProfit, price - minPrice);
+        }
+
+        return maxProfit;
+    }
+};
